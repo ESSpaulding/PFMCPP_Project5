@@ -187,14 +187,16 @@ void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
 
 void CellPhone::TouchScreen::backLightTimer(float timer)
 {
-    time_t currentTime = time(nullptr);
+    
+    float currentTime = 1.1f;
     while (backLightOn)
     {
         std::cout << "Screen ON\n";
     
-        while ( time(nullptr) - currentTime < timer )
+        while ( currentTime < timer )
         {
-            //nice blocking loop here :/
+            //stll a loop, but does not do significant time delay
+            currentTime += 1.f;
         }
         std::cout << "Screen OFF\n";
         backLightOn = false;         //modifying member variable
@@ -360,8 +362,6 @@ void FourBandPEQ::speakerCompensation()  // 4) member function #2 of 2nd new UDT
 #include <iostream>
 int main()
 {
-    srand(time(nullptr));
-    
     std::cout << "we are in the main function" << std::endl;
     Oscilloscope oScope;  //3) instatiation of UDT
     oScope.measureVoltage(2.01f, 4.123f);
