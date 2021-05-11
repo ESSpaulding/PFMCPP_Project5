@@ -113,8 +113,8 @@ struct CellPhone
     bool hasSDCardPort;
     bool phoneHasHeadphoneJack;
     
-    CellPhone() : screenSize(3), gigabytesOfRAM(128), hasSDCardPort(false), phoneHasHeadphoneJack(true) { }
-    ~CellPhone() { std::cout << "CellPhone object destructed\n"; }    // 2) in-class destructor implementation
+    CellPhone();
+    ~CellPhone();
     
     struct TouchScreen
     {
@@ -124,13 +124,13 @@ struct CellPhone
         int numberOfGestures;
         bool backLightOn;
         
-        TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), x(0), y(0), numberOfGestures(3), backLightOn(true) { std::cout << "TS Ctr \n"; }
-        ~TouchScreen() { std::cout << "TS Dtr\n"; }  //2) in-class destructor
+        TouchScreen();
+        ~TouchScreen();
         
         void fingerPrintVerification(bool ownersFinger, bool usersFinger);
         void getFingerPosition(int X, int Y);
         void quickSwipe(bool swipeUp, bool swipeDown);
-        void backLightTimer(float timer);                   //backLightTimer turns off the backLight to save power after timer runs out.
+        void backLightTimer(float timer);
     };
 
     void makeCall (int phoneNumber, std::string personYouAreCalling);
@@ -140,6 +140,9 @@ struct CellPhone
 
     TouchScreen touchScreen;
 };
+
+CellPhone::CellPhone() : screenSize(3), gigabytesOfRAM(128), hasSDCardPort(false), phoneHasHeadphoneJack(true) { }
+CellPhone::~CellPhone() { std::cout << "CellPhone object destructed\n"; }
 
 void CellPhone::makeCall (int phoneNumber, std::string personYouAreCalling)
 {
@@ -165,6 +168,9 @@ void CellPhone::dropPhone(int timesDropped)
     }
     std::cout << " to " << gigabytesOfRAM << " becasue you dropped your phone " << timesDropped << " times." << std::endl;
 }
+
+CellPhone::TouchScreen::TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), x(0), y(0), numberOfGestures(3), backLightOn(true) { std::cout << "TS Ctr \n"; }
+CellPhone::TouchScreen::~TouchScreen() { std::cout << "TS Dtr\n"; }  //2) in-class destructor
 
 void CellPhone::TouchScreen::fingerPrintVerification(bool ownersFinger, bool usersFinger)
 {
