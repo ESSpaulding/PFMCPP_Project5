@@ -8,59 +8,51 @@ Purpose:  This project continues developing Project3.
        you will learn how to take code from existing projects and migrate only what you need to new projects
        you will learn how to write code that doesn't leak as well as how to refactor. 
 
-Since you didn't do Project 3:
-write 3 UDTs below (where it asks for Copied UDTs) that EACH have: 
-        5 member variables
-            the member variable names and types should be relevant to the work the UDT will perform.
-        3 member functions with an arbitrary number of parameters
-            give some of those parameters default values.
-        constructors that initialize some of these member variables
-            the remaining member variables should be initialized in-class
-        for() or while() loops that modify member variables
-
- 1) 2 of your 3 UDTs need to have a nested UDT.
-    this nested UDT should fulfill the same requirements as above:
-        5 member variables  
-        3 member functions
-        constructors and loops.
+ Destructors
         
- 2) Define your implementations of all functions OUTSIDE of the class. 
- NO IN-CLASS IMPLEMENTATION ALLOWED
-
- 3) add destructors to all of your UDTs
+ 0) move all of your implementations of all functions to OUTSIDE of the class. 
+ 
+ 1) Copy 3 of your user-defined types (the ones with constructors and for()/while() loops from Project 3) here
+ 2) add destructors
         make the destructors do something like print out the name of the class.
- 
- 4) add 2 new UDTs that use only the types you copied above as member variables.
- 
- 5) Add destructors to these 2 new types that do something.  
+
+ 3) add 2 new UDTs that use only the types you copied above as member variables.
+
+ 4) add 2 member functions that use your member variables to each of these new UDTs
+
+ 5) Add constructors and destructors to these 2 new types that do stuff.  
         maybe print out the name of the class being destructed, or call a member function of one of the members.  be creative
  
- 6) use at least 2 instances of each of your UDTs in main. 
-        add some std::cout statements in main() that use your UDT's member variables.
+ 6) copy over your main() from the end of Project3 and get it to compile with the types you copied over.
+        remove any code in main() that uses types you didn't copy over.
  
- 7) After you finish, click the [run] button.  Clear up any errors or warnings as best you can.
+ 7) Instantiate your 2 UDT's from step 4) in the main() function at the bottom.
+       call their member functions.
  
-If you need inspiration for what to write, take a look at previously approved student projects in the Slack Workspace channel for this project part.
+ 8) After you finish, click the [run] button.  Clear up any errors or warnings as best you can.
+ 
  */
 
 /*
- UDT 1:
+ copied UDT 1:
  */
 
 /*
- UDT 2:
+ copied UDT 2:
  */
 
 /*
- UDT 3:
+ copied UDT 3:
  */
 
 /*
  new UDT 4:
+ with 2 member functions
  */
 
 /*
  new UDT 5:
+ with 2 member functions
  */
 
 /*
