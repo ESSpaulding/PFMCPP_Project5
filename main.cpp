@@ -177,7 +177,10 @@ struct CellPhone
     TouchScreen touchScreen;
 };
 
-CellPhone::CellPhone() : screenSize(3), gigabytesOfRAM(128), hasSDCardPort(false), phoneHasHeadphoneJack(true) { }
+CellPhone::CellPhone() : screenSize(3), gigabytesOfRAM(128), hasSDCardPort(false), phoneHasHeadphoneJack(true) 
+{ 
+    
+}
 
 CellPhone::~CellPhone() 
 { 
