@@ -176,7 +176,11 @@ struct CellPhone
 };
 
 CellPhone::CellPhone() : screenSize(3), gigabytesOfRAM(128), hasSDCardPort(false), phoneHasHeadphoneJack(true) { }
-CellPhone::~CellPhone() { std::cout << "CellPhone object destructed\n"; }
+
+CellPhone::~CellPhone() 
+{ 
+    std::cout << "CellPhone object destructed\n"; 
+}
 
 void CellPhone::makeCall (int phoneNumber, std::string personYouAreCalling)
 {
@@ -209,8 +213,15 @@ void CellPhone::cellPhoneFunction()
     std::cout << "Screen Size: " << this->screenSize << std::endl;
 }
 
-CellPhone::TouchScreen::TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), x(0), y(0), numberOfGestures(3), backLightOn(true) { std::cout << "TS Ctr \n"; }
-CellPhone::TouchScreen::~TouchScreen() { std::cout << "TS Dtr\n"; }  //2) in-class destructor
+CellPhone::TouchScreen::TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), x(0), y(0), numberOfGestures(3), backLightOn(true) 
+{ 
+    std::cout << "TS Ctr \n"; 
+}
+
+CellPhone::TouchScreen::~TouchScreen() 
+{ 
+    std::cout << "TS Dtr\n"; 
+}  //2) in-class destructor
 
 void CellPhone::TouchScreen::fingerPrintVerification(bool ownersFinger, bool usersFinger)
 {
@@ -262,17 +273,22 @@ struct ParametricEq
     void killFeedback (float feedbackFrequency, float gainReduction);
     void centerBandFunction();
 };
-//outside class constructor-initializer-list implementation
+
 ParametricEq::ParametricEq() :
 lowShelfFrequency(50.0f),
 highShelfFrequency(1800.0f),
 centerBandFrequency(0.5f),
 centerBandGain(0.5f),
 centerBandSlope(0.7f)
-{ std::cout << "ParametricEQ object constructed " << std::endl;}
-//outside-class destructor implementation
-ParametricEq::~ParametricEq() { std::cout << "ParametricEQ object destructed\n"; }   //2)
-//vocalDeEss could use eq to assign Fc to 4kHz and decrease gain by 6dB.
+{ 
+    std::cout << "ParametricEQ object constructed " << std::endl;
+}
+
+ParametricEq::~ParametricEq() //2)
+{ 
+    std::cout << "ParametricEQ object destructed\n"; 
+}   
+
 void ParametricEq::vocalDeEss (float sibilanceAmount, float sibilanceSuppression)
 {
     centerBandGain = centerBandGain - sibilanceAmount;   //is this an example of "implied this" ?
@@ -302,7 +318,6 @@ void ParametricEq::centerBandFunction()
 
 /*
  new UDT 4:
- 3) using only the types copied above as member functions. 4) with 2 member functions
  */
 
 struct MeasurementRack
