@@ -36,14 +36,14 @@ namespace Example
     {
         MyFoo() { std::cout << "creating MyFoo" << std::endl; }
         ~MyFoo() { std::cout << "destroying MyFoo" << std::endl; }
-		
-		// 2a) the member function whose function body is almost identical to the std::cout statement in main.
-        void memberFunc() 
-		{ 
+        
+        // 2a) the member function whose function body is almost identical to the std::cout statement in main.
+        void memberFunc()
+        {
             // 2b) explicitly using 'this' inside this member function.
-			std::cout << "MyFoo returnValue(): " << this->returnValue() << " and MyFoo memberVariable: " << this->memberVariable << std::endl; 
-		}  
-		
+            std::cout << "MyFoo returnValue(): " << this->returnValue() << " and MyFoo memberVariable: " << this->memberVariable << std::endl;
+        }
+        
         int returnValue() { return 3; }
         float memberVariable = 3.14f;
     };
@@ -52,10 +52,10 @@ namespace Example
     {
         //an instance of the User-Defined Type named mf
         MyFoo mf;
-		
+        
         // 1) a std::cout statement that uses mf's member variables
-        std::cout << "mf returnValue(): " << mf.returnValue() << " and mf memberVariable: " << mf.memberVariable << std::endl; 
-		
+        std::cout << "mf returnValue(): " << mf.returnValue() << " and mf memberVariable: " << mf.memberVariable << std::endl;
+        
         // 2c) calling mf's member function.  the member function's body is almost identical to the cout statement above.
         mf.memberFunc();
         return 0;
@@ -89,13 +89,15 @@ struct Oscilloscope
     float measurement ( float a, float b );
 };
 
-//Constructor intializer list
 Oscilloscope::Oscilloscope() : horizontalInput(0.0f),
 verticalInput(0.0f),
 horizontalGain(1),
 verticalGain(1),
-horizontalSweepControl(1) { }
-// 2) destructor implementation outside class
+horizontalSweepControl(1) 
+{ 
+
+}
+
 Oscilloscope::~Oscilloscope()
 {
     std::cout << "Oscilloscope destructed\n";
@@ -170,12 +172,20 @@ struct CellPhone
     void playGame (bool gameMode);
     void sendEmail (std::string emailAddress);
     void dropPhone(int timesDropped);
+    void cellPhoneFunction();
 
     TouchScreen touchScreen;
 };
 
-CellPhone::CellPhone() : screenSize(3), gigabytesOfRAM(128), hasSDCardPort(false), phoneHasHeadphoneJack(true) { }
-CellPhone::~CellPhone() { std::cout << "CellPhone object destructed\n"; }
+CellPhone::CellPhone() : screenSize(3), gigabytesOfRAM(128), hasSDCardPort(false), phoneHasHeadphoneJack(true) 
+{ 
+    
+}
+
+CellPhone::~CellPhone() 
+{ 
+    std::cout << "CellPhone object destructed\n"; 
+}
 
 void CellPhone::makeCall (int phoneNumber, std::string personYouAreCalling)
 {
@@ -195,44 +205,61 @@ void CellPhone::sendEmail (std::string emailAddress)
 void CellPhone::dropPhone(int timesDropped)
 {
     std::cout << "Your RAM has fallen from: " << gigabytesOfRAM;
+
     for ( int i = 0; i < timesDropped; i++)
     {
         gigabytesOfRAM = gigabytesOfRAM - rand()%30;
     }
+
     std::cout << " to " << gigabytesOfRAM << " becasue you dropped your phone " << timesDropped << " times." << std::endl;
 }
 
-CellPhone::TouchScreen::TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), x(0), y(0), numberOfGestures(3), backLightOn(true) { std::cout << "TS Ctr \n"; }
-CellPhone::TouchScreen::~TouchScreen() { std::cout << "TS Dtr\n"; }  //2) in-class destructor
+void CellPhone::cellPhoneFunction()
+{
+    this->screenSize = 15;
+    std::cout << "Screen Size: " << this->screenSize << std::endl;
+}
+
+CellPhone::TouchScreen::TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), x(0), y(0), numberOfGestures(3), backLightOn(true) 
+{ 
+    std::cout << "TS Ctr \n"; 
+}
+
+CellPhone::TouchScreen::~TouchScreen() 
+{ 
+    std::cout << "TS Dtr\n"; 
+}  
 
 void CellPhone::TouchScreen::fingerPrintVerification(bool ownersFinger, bool usersFinger)
 {
      std::cout << "This is " << (ownersFinger == usersFinger ? "your phone" : "not your phone") << "\n";
 }
+
 void CellPhone::TouchScreen::getFingerPosition(int X, int Y)
 {
     std::cout << "X coordinate is " << X << " Y coordinate is " << Y  << std::endl;
 }
+
 void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
 {
     std::cout << swipeUp << swipeDown << std::endl;
 }
 
 void CellPhone::TouchScreen::backLightTimer(float timer)
-{
-    
+{   
     float currentTime = 1.1f;
+
     while (backLightOn)
     {
         std::cout << "Screen ON\n";
     
         while ( currentTime < timer )
         {
-            //stll a loop, but does not do significant time delay
             currentTime += 1.f;
         }
+
         std::cout << "Screen OFF\n";
-        backLightOn = false;         //modifying member variable
+        backLightOn = false;        
     }
     std::cout << "Goodbye" << std::endl;
 }
@@ -253,24 +280,29 @@ struct ParametricEq
     void vocalDeEss (float sibilanceAmount, float sibilanceSuppression);
     void rumbleFilter (float rumbleFrequency, float filterCut);
     void killFeedback (float feedbackFrequency, float gainReduction);
+    void centerBandFunction();
 };
-//outside class constructor-initializer-list implementation
+
 ParametricEq::ParametricEq() :
 lowShelfFrequency(50.0f),
 highShelfFrequency(1800.0f),
 centerBandFrequency(0.5f),
 centerBandGain(0.5f),
 centerBandSlope(0.7f)
-{}
-//outside-class destructor implementation
-ParametricEq::~ParametricEq() { std::cout << "ParametricEQ object destructed\n"; }   //2)
-//vocalDeEss could use eq to assign Fc to 4kHz and decrease gain by 6dB.
+{ 
+    std::cout << "ParametricEQ object constructed " << std::endl;
+}
+
+ParametricEq::~ParametricEq() //2)
+{ 
+    std::cout << "ParametricEQ object destructed\n"; 
+}   
+
 void ParametricEq::vocalDeEss (float sibilanceAmount, float sibilanceSuppression)
 {
-    centerBandFrequency = 4000.f;
-    centerBandGain = centerBandGain - sibilanceAmount;
+    centerBandGain = centerBandGain - sibilanceAmount;   //is this an example of "implied this" ?
     sibilanceSuppression = 0.f;
-    std::cout << "Vocal DeEss engaged.  Fc: " << centerBandFrequency << " gain reduced to: " << centerBandGain << std::endl;
+    std::cout << "Vocal DeEss engaged.  Fc: " << this->centerBandFrequency << " gain reduced to: " << this->centerBandGain << std::endl;
 }
 
 void ParametricEq::rumbleFilter (float rumbleFrequency, float filterCut)
@@ -288,9 +320,13 @@ void ParametricEq::killFeedback (float feedbackFrequency, float gainReduction)
     std::cout << "FB suppression Fc: " << centerBandFrequency << " gain reduced to: " << centerBandGain << std::endl;
 }
 
+void ParametricEq::centerBandFunction()
+{
+    std::cout << "Fc: " << this->centerBandFrequency << "  Gain: " << this->centerBandGain << "  Slope: " << this->centerBandSlope << std::endl; // 2b)
+}
+
 /*
  new UDT 4:
- 3) using only the types copied above as member functions. 4) with 2 member functions
  */
 
 struct MeasurementRack
@@ -302,8 +338,10 @@ struct MeasurementRack
     MeasurementRack();
     ~MeasurementRack();
     
-    float overallGain();  //4) memeber function
-    float power();        //4) member function #2
+    float overallGain();
+    float power();
+    void memberGainFunction();  //2a
+    void memberPowerFunction();  //2a  member function that accesses member variable of owning instance of object
 };
 
 MeasurementRack::MeasurementRack()   //5)  constructor that does something and calls member function
@@ -336,6 +374,15 @@ float MeasurementRack::power()       // 4) member function #2 of  1st new UDT
     return (outputOscope.measurement(2.1f, 3.1f) * outputOscope.measurement(1.02f, 1.11f)) / supplyScope.measurement(1.01f, 1.11f);
 }
 
+void MeasurementRack::memberGainFunction()  //2a)
+{
+    std::cout << "overall gain is: " << this->overallGain() << std::endl;  // 2b)
+}
+
+void MeasurementRack::memberPowerFunction()  //2a)
+{
+    std::cout << "overall power is: " << this->power() << std::endl;   // 2b) measurementRack.power()no go, because that instance exists outside
+}
 /*
  new UDT 5:
  3) using only the types copied above as member functions. 4) with 2 member functions
@@ -354,10 +401,17 @@ struct FourBandPEQ
     void speakerCompensation();
 };
 
-FourBandPEQ::FourBandPEQ() { std::cout <<"FourBandPEQ object constructed\n"; }
-FourBandPEQ::~FourBandPEQ() { std::cout << "FourBandPEQ object destroyed\n"; }
+FourBandPEQ::FourBandPEQ() 
+{ 
+    std::cout <<"FourBandPEQ object constructed\n"; 
+}
 
-void FourBandPEQ::dimeBagPEQ()  // 4) member function #1 of  2nd new UDT
+FourBandPEQ::~FourBandPEQ() 
+{ 
+    std::cout << "FourBandPEQ object destroyed\n"; 
+}
+
+void FourBandPEQ::dimeBagPEQ()
 {
     lowBandPEQ.centerBandFrequency = 100.f;
     lowBandPEQ.centerBandGain = 0.3f;
@@ -368,7 +422,7 @@ void FourBandPEQ::dimeBagPEQ()  // 4) member function #1 of  2nd new UDT
     std::cout << "Frowning face pre EQ :( , smiling face post EQ :)\n";
 }
 
-void FourBandPEQ::speakerCompensation()  // 4) member function #2 of 2nd new UDT
+void FourBandPEQ::speakerCompensation()
 {
     lowBandPEQ.lowShelfFrequency = 125.f;
     lowMidBandPEQ.centerBandFrequency = 340.f;
@@ -395,32 +449,40 @@ void FourBandPEQ::speakerCompensation()  // 4) member function #2 of 2nd new UDT
 #include <iostream>
 int main()
 {
-    std::cout << "we are in the main function" << std::endl;
     Oscilloscope oScope;  //3) instatiation of UDT
     oScope.measureVoltage(2.01f, 4.123f);
     oScope.graphWaveformDifference(32, 16);
     oScope.measurement(5.123f, 6.321f);
 
     rackFunction();  //free function that tests MeasurementRack
-    MeasurementRack measurementRack;                                                 //7 instantiate new UDT and call member functions
-    std::cout << "overall gain is: " << measurementRack.overallGain() << std::endl;
-    std::cout << "overall power is: " << measurementRack.power() << std::endl;
+    MeasurementRack measurementRack;
+    std::cout << "overall gain is: " << measurementRack.overallGain() << std::endl;  //1)  main std::cout
+    measurementRack.memberGainFunction();  //2c) print the same as above, but from inside the member function
+    std::cout << "overall power is: " << measurementRack.power() << std::endl;  //1) main std::cout
+    measurementRack.memberPowerFunction();  //2c)
     
     CellPhone myPhone;
     CellPhone yourPhone;
     myPhone.makeCall(231345632, "Karen");
     myPhone.dropPhone(2);
+    std::cout << "Screen Size: " << yourPhone.screenSize << std::endl;  //1)
+    yourPhone.cellPhoneFunction();                 //2c)  screen size will not be the same because this function changes the objects member variable value
+    
     CellPhone::TouchScreen myTouchscreen;
     myTouchscreen.fingerPrintVerification(true, false);
     yourPhone.makeCall(8675301, "Daryl");
     CellPhone::TouchScreen yourTouchscreen;
     yourTouchscreen.fingerPrintVerification(true, true);
-    myTouchscreen.backLightTimer(2);                          //part5 loop that changes member variable backLightOn in seconds
+    myTouchscreen.backLightTimer(2);
 
-    ParametricEq pEq;
-    pEq.rumbleFilter(30.0f, 120.0f);
-    pEq.killFeedback(220, .15f);
-    //UDT created from ParamtricEQ objects to create a larger, more complex EQ..kinda  //7
+    ParametricEq pEQ;
+    pEQ.rumbleFilter(30.0f, 120.0f);
+    pEQ.killFeedback(220, .15f);
+    std::cout << "Vocal DeEss engaged.  Fc: " << pEQ.centerBandFrequency << " gain reduced to: " << pEQ.centerBandGain << std::endl; //1)
+    pEQ.vocalDeEss(21.f, 30.f);  //2c) this function leaves a previous "implied this->" that modifies member variables.
+    std::cout << "Fc: " << pEQ.centerBandFrequency << "  Gain: " << pEQ.centerBandGain << "  Slope: " << pEQ.centerBandSlope << std::endl;  //1)
+    pEQ.centerBandFunction();                                                                                                               //2c)
+    
     FourBandPEQ fbPEQ;
     fbPEQ.dimeBagPEQ();
     fbPEQ.speakerCompensation();
