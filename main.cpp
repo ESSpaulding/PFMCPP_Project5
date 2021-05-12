@@ -89,13 +89,15 @@ struct Oscilloscope
     float measurement ( float a, float b );
 };
 
-//Constructor intializer list
 Oscilloscope::Oscilloscope() : horizontalInput(0.0f),
 verticalInput(0.0f),
 horizontalGain(1),
 verticalGain(1),
-horizontalSweepControl(1) { }
-// 2) destructor implementation outside class
+horizontalSweepControl(1) 
+{ 
+
+}
+
 Oscilloscope::~Oscilloscope()
 {
     std::cout << "Oscilloscope destructed\n";
@@ -200,10 +202,12 @@ void CellPhone::sendEmail (std::string emailAddress)
 void CellPhone::dropPhone(int timesDropped)
 {
     std::cout << "Your RAM has fallen from: " << gigabytesOfRAM;
+
     for ( int i = 0; i < timesDropped; i++)
     {
         gigabytesOfRAM = gigabytesOfRAM - rand()%30;
     }
+
     std::cout << " to " << gigabytesOfRAM << " becasue you dropped your phone " << timesDropped << " times." << std::endl;
 }
 
@@ -221,36 +225,38 @@ CellPhone::TouchScreen::TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), 
 CellPhone::TouchScreen::~TouchScreen() 
 { 
     std::cout << "TS Dtr\n"; 
-}  //2) in-class destructor
+}  
 
 void CellPhone::TouchScreen::fingerPrintVerification(bool ownersFinger, bool usersFinger)
 {
      std::cout << "This is " << (ownersFinger == usersFinger ? "your phone" : "not your phone") << "\n";
 }
+
 void CellPhone::TouchScreen::getFingerPosition(int X, int Y)
 {
     std::cout << "X coordinate is " << X << " Y coordinate is " << Y  << std::endl;
 }
+
 void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
 {
     std::cout << swipeUp << swipeDown << std::endl;
 }
 
 void CellPhone::TouchScreen::backLightTimer(float timer)
-{
-    
+{   
     float currentTime = 1.1f;
+
     while (backLightOn)
     {
         std::cout << "Screen ON\n";
     
         while ( currentTime < timer )
         {
-            //stll a loop, but does not do significant time delay
             currentTime += 1.f;
         }
+
         std::cout << "Screen OFF\n";
-        backLightOn = false;         //modifying member variable
+        backLightOn = false;        
     }
     std::cout << "Goodbye" << std::endl;
 }
@@ -392,8 +398,15 @@ struct FourBandPEQ
     void speakerCompensation();
 };
 
-FourBandPEQ::FourBandPEQ() { std::cout <<"FourBandPEQ object constructed\n"; }
-FourBandPEQ::~FourBandPEQ() { std::cout << "FourBandPEQ object destroyed\n"; }
+FourBandPEQ::FourBandPEQ() 
+{ 
+    std::cout <<"FourBandPEQ object constructed\n"; 
+}
+
+FourBandPEQ::~FourBandPEQ() 
+{ 
+    std::cout << "FourBandPEQ object destroyed\n"; 
+}
 
 void FourBandPEQ::dimeBagPEQ()
 {
