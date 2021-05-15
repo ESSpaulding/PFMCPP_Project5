@@ -54,6 +54,7 @@ You don't have to do this, you can keep your current object name and just change
 #include <map>  //not using yet
 #include <ctime>
 #include <unistd.h>
+#include "LeakedObjectDetector.h"
 
 /*
  copied UDT 1:
@@ -73,6 +74,8 @@ struct Oscilloscope
     void graphWaveformDifference (int channelA, int channelB);
     float measureVoltage (float channelA, float channelB);
     float measurement ( float a, float b );
+
+    JUCE_LEAK_DETECTOR(Oscilloscope)
 };
 
 Oscilloscope::Oscilloscope() : horizontalInput(0.0f),
