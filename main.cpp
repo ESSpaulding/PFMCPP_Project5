@@ -517,50 +517,46 @@ struct FourBandPEQWrapper
 #include <iostream>
 int main()
 {
-    Oscilloscope* oScope = new Oscilloscope;
-    OscilloscopeWrapper oscilloscopeWrapper( oScope );
-    oScope->measureVoltage(2.01f, 4.123f);
-    oScope->graphWaveformDifference(32, 16);
-    oScope->measurement(5.123f, 6.321f);
+    OscilloscopeWrapper oScopeWrapper( new Oscilloscope() );
+    oScopeWrapper.pointerToOscilloscope->measureVoltage(2.01f, 4.123f);
+    oScopeWrapper.pointerToOscilloscope->graphWaveformDifference(32, 16);
+    oScopeWrapper.pointerToOscilloscope->measurement(5.123f, 6.321f);
 
     rackFunction();  //free function that tests MeasurementRack
-    MeasurementRack* measurementRack = new MeasurementRack;
-    MeasurementRackWrapper measurementRackWrapper( measurementRack );
-    std::cout << "overall gain is: " << measurementRack->overallGain() << std::endl;
-    measurementRack->memberGainFunction();
-    std::cout << "overall power is: " << measurementRack->power() << std::endl;
-    measurementRack->memberPowerFunction();
-    
-    CellPhone* myPhone = new CellPhone();
-    CellPhoneWrapper myPhoneWrapper( myPhone );
-    CellPhone* yourPhone = new CellPhone();
-    CellPhoneWrapper yourPhoneWrapper( yourPhone );
-    myPhone->makeCall(231345632, "Karen");
-    myPhone->dropPhone(2);
-    std::cout << "Screen Size: " << yourPhone->screenSize << std::endl;
-    yourPhone->cellPhoneFunction();
-    
-    CellPhone::TouchScreen* myTouchscreen = new CellPhone::TouchScreen();
-    TouchScreenWrapper myTouchScreenWrapper( myTouchscreen );
-    myTouchscreen->fingerPrintVerification(true, false);
-    yourPhone->makeCall(8675301, "Daryl");
-    CellPhone::TouchScreen yourTouchscreen;
-    yourTouchscreen.fingerPrintVerification(true, true);
-    myTouchscreen->backLightTimer(2);
 
-    ParametricEq* pEQ = new ParametricEq();
-    ParametricEqWrapper parametricEqWrapper( pEQ );
-    pEQ->rumbleFilter(30.0f, 120.0f);
-    pEQ->killFeedback(220, .15f);
-    std::cout << "Vocal DeEss engaged.  Fc: " << pEQ->centerBandFrequency << " gain reduced to: " << pEQ->centerBandGain << std::endl; //1)
-    pEQ->vocalDeEss(21.f, 30.f);
-    std::cout << "Fc: " << pEQ->centerBandFrequency << "  Gain: " << pEQ->centerBandGain << "  Slope: " << pEQ->centerBandSlope << std::endl;
-    pEQ->centerBandFunction();
+    MeasurementRackWrapper measurementRackWrapper( new MeasurementRack() );
+    std::cout << "overall gain is: " << measurementRackWrapper.pointerToMeasurementRack->overallGain() << std::endl;
+    measurementRackWrapper.pointerToMeasurementRack->memberGainFunction();
+    std::cout << "overall power is: " << measurementRackWrapper.pointerToMeasurementRack->power() << std::endl;
+    measurementRackWrapper.pointerToMeasurementRack->memberPowerFunction();
     
-    FourBandPEQ* fbPEQ = new FourBandPEQ();
-    FourBandPEQWrapper fourBandPEQWrapper( fbPEQ );
-    fbPEQ->dimeBagPEQ();
-    fbPEQ->speakerCompensation();
+    CellPhoneWrapper myPhoneWrapper( new CellPhone() );
+    CellPhoneWrapper yourPhoneWrapper(new CellPhone());
+    myPhoneWrapper.pointerToCellPhone->makeCall(231345632, "Karen");
+    myPhoneWrapper.pointerToCellPhone->dropPhone(2);
+    std::cout << "Screen Size: " << yourPhoneWrapper.pointerToCellPhone->screenSize << std::endl;
+    yourPhoneWrapper.pointerToCellPhone->cellPhoneFunction();
+    
+    TouchScreenWrapper myTouchScreenWrapper( new CellPhone::TouchScreen );
+    myTouchScreenWrapper.pointerToTouchScreen->fingerPrintVerification(true, false);
+    yourPhoneWrapper.pointerToCellPhone->makeCall(8675301, "Daryl");
+    TouchScreenWrapper yourTouchScreenWrapper( new CellPhone::TouchScreen );
+    yourTouchScreenWrapper.pointerToTouchScreen->fingerPrintVerification(true, true);
+    myTouchScreenWrapper.pointerToTouchScreen->backLightTimer(2);
+
+    ParametricEqWrapper pEQWrapper(new ParametricEq );
+    pEQWrapper.pointerToParametricEq->rumbleFilter(30.0f, 120.0f);
+    pEQWrapper.pointerToParametricEq->killFeedback(220, .15f);
+    std::cout << "Vocal DeEss engaged.  Fc: " << pEQWrapper.pointerToParametricEq->centerBandFrequency << " gain reduced to: " << pEQWrapper.pointerToParametricEq->centerBandGain << std::endl; //1)
+    pEQWrapper.pointerToParametricEq->vocalDeEss(21.f, 30.f);
+    std::cout << "Fc: " << pEQWrapper.pointerToParametricEq->centerBandFrequency << "  Gain: " << pEQWrapper.pointerToParametricEq->centerBandGain << "  Slope: " << pEQWrapper.pointerToParametricEq->centerBandSlope << std::endl;
+    pEQWrapper.pointerToParametricEq->centerBandFunction();
+    
+    FourBandPEQWrapper fbPEQWrapper( new FourBandPEQ );
+    fbPEQWrapper.pointerToFourBandPEQ->dimeBagPEQ();
+    fbPEQWrapper.pointerToFourBandPEQ->speakerCompensation();
 
     std::cout << "good to go!\n" << std::endl;
+
+    return 0;
 }
